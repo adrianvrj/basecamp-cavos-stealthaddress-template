@@ -38,6 +38,19 @@ export function MetaAddressTab() {
                                     <code>{JSON.stringify(MOCK_KEYS, null, 2)}</code>
                                 </pre>
                             </div>
+
+                            <div className="rounded-md border border-amber-500/50 bg-amber-500/5 p-4 dark:border-amber-500/20 dark:bg-amber-500/10">
+                                <h4 className="mb-2 text-sm font-semibold text-amber-900 dark:text-amber-500">
+                                    SAVE YOUR PRIVATE KEY!
+                                </h4>
+                                <p className="mb-3 text-xs text-amber-800 dark:text-amber-200/70">
+                                    You need it to claim payments. It will not be shown again.
+                                </p>
+                                <div className="break-all rounded bg-white/50 px-3 py-2 font-mono text-xs text-amber-950 dark:bg-black/50 dark:text-amber-200">
+                                    0x60162666d7d84fb01c8881ad22fce8250e6227af050af1abb5b142ac7fc3d3e
+                                </div>
+                            </div>
+
                             <div className="flex flex-col gap-4 sm:flex-row sm:justify-end">
                                 <Button variant="outline">Generate Meta-Address</Button>
                                 <Button>Register Your Keys Onchain</Button>
