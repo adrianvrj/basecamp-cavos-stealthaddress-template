@@ -1,22 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
+// for (const result of results) {
+//   if (result.isOurs) {
+//     console.log('Found payment!');
+//     console.log('Stealth Address:', result.stealthAddress);
+//     console.log('Spending Key:', result.spendingKey);
+    
+//     // Use spendingKey to control the stealth account
+//   }
+// }
+
+// // Get scanning statistics
+// const stats = scanner.getStats();
+// console.log(`Scanned ${stats.totalAnnouncements} announcements`);
+// console.log(`Found ${stats.confirmedMatches} payments`);
+// console.log(`Scan time: ${stats.scanTimeMs}ms`);
+
 export function ScanAndClaimTab() {
     const [privateKey, setPrivateKey] = useState("");
     const [fromBlock, setFromBlock] = useState("");
     const [status, setStatus] = useState<"idle" | "scanning" | "error" | "success">("idle");
+    const [results, setResults] = useState<any[]>([]);
+    const [stats, setStats] = useState<any>({});
+
+    // const scanner = new StealthScanner({
+    //   registryAddress: REGISTRY_ADDRESS,
+    //   factoryAddress: FACTORY_ADDRESS,
+    //   rpcUrl: 'https://starknet-mainnet.public.blastapi.io',
+    //   chainId: '0x534e5f4d41494e',
+    // });
+
+    useEffect(() => {
+        // scanner.initialize(REGISTRY_ABI, ACCOUNT_CLASS_HASH);
+        console.log("Scanner initialized");
+    }, []);
+
+    useEffect(() => {
+        handleShowResults();
+    }, [results]);
 
     const handleScan = () => {
         setStatus("scanning");
-        // Mock the error to match the screenshot's red failure box
-        setTimeout(() => {
-            setStatus("error");
-        }, 1500);
+        // const results = await scanner.scan(
+        //   spendingPubkey,
+        //   viewingPrivKey,
+        //   spendingPrivKey,
+        //   0 // fromBlock
+        // );
+        // console.log("Scan results: ", results);
+        setResults(results);
+    };
+
+    const handleShowResults = () => {
+        // const stats = scanner.getStats();
+        setStats(stats);
     };
 
     return (
@@ -101,9 +144,11 @@ export function ScanAndClaimTab() {
                 <CardContent>
                     <div className="flex min-h-[100px] items-center justify-center rounded-md border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
                         <span className="text-sm font-medium text-zinc-500">
-                            {status === "idle" && "Waiting to scan..."}
-                            {status === "scanning" && "Scanning..."}
-                            {status === "error" && "No results."}
+                            {stats.totalAnnouncements} announcements scanned
+                            <br />
+                            {stats.confirmedMatches} payments found
+                            <br />
+                            {stats.scanTimeMs}ms scan time
                         </span>
                     </div>
                 </CardContent>
