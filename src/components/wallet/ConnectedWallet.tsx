@@ -1,6 +1,6 @@
 "use client";
 
-import { DEFAULT_SEPOLIA_RPC_URL, STRK_TOKEN_ADDRESS } from '@/constants';
+import { SEPOLIA_CONFIG, STRK_TOKEN_ADDRESS } from '@/constants';
 import { useCavos } from '@cavos/react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -29,7 +29,7 @@ export function ConnectedWallet() {
 
         try {
             const provider = new RpcProvider({
-                nodeUrl: DEFAULT_SEPOLIA_RPC_URL,
+                nodeUrl: SEPOLIA_CONFIG.rpcUrl,
             });
 
             const result = await provider.callContract({
